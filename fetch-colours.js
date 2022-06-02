@@ -86,7 +86,7 @@ async function generateHTMLViewer() {
   // replace the template with the html
   const templateHTML = template.replace('<!-- DUMP_ME_HERE -->', html);
   // write to disk
-  await writeFile('css/index.html', templateHTML);
+  await writeFile('./index.html', templateHTML);
 }
 
 
