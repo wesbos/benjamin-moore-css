@@ -1,0 +1,16 @@
+{
+  "name": "benjamin-moore-css",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node fetch-colours.js"
+  },
+  "author": "Wes Bos",
+  "license": "ISC",
+  "dependencies": {
+    "@sindresorhus/slugify": "^2.1.0",
+    "isomorphic-fetch": "^3.0.0"
+  }
+}
