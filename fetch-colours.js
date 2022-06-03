@@ -1,11 +1,10 @@
 import fetch from 'isomorphic-fetch';
 import { writeFile, readFile, stat } from 'fs/promises';
 import slugify from '@sindresorhus/slugify';
+import { invertColor } from './utils.js';
 
 async function fetchColors() {
   try {
-    // try see if we saved the colours first
-    const fileExists = await stat('./colors.json');
     // any json parse error will also be caught
     const savedColors = await readFile('colors.json', 'utf8');
     console.log('using cached');
@@ -31,7 +30,6 @@ async function familyColors() {
   const colors = await fetchColors();
   return colors.reduce((fams, color) => {
     const { family } = color;
-    console.log(family)
     fams[family] = fams[family] || [];
     fams[family].push(color);
     return fams;
@@ -46,6 +44,7 @@ async function familyColors() {
 function makeAGoodName(name) {
   return slugify(name.replace('\'',''));
 }
+
 
 async function generateCSSFile() {
   const colorsByfamily = await familyColors();
@@ -64,12 +63,12 @@ async function generateCSSFile() {
 async function generateHTMLViewer() {
   const colorsByfamily = await familyColors();
   const html = Object.entries(colorsByfamily).map(([family, colors]) => {
-    const header = `<h2>${family}</h2>`;
+    const header = `<h2 id="${slugify(family)}">${family}</h2>`;
     const html = colors.map(color => {
       const { name, hex } = color;
       return `<div class="color" style="background-color: #${hex}">
-        <p class="name">${name}</p>
-        <button type="button" class="hex">#${hex}</button>
+        <p class="name" style="color: ${invertColor(hex, true)}">${name}</p>
+        <button type="button" class="hex">--${makeAGoodName(name)}: #${hex};</button>
         <button type="button" class="variable">var(--${makeAGoodName(name)})</button>
       </div>`
     }).join('\n');
@@ -92,8 +91,3 @@ async function generateHTMLViewer() {
 
 generateCSSFile();
 generateHTMLViewer();
-
-async function generateCSSVariables() {
-
-  console.log()
-}

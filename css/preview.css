@@ -1,5 +1,10 @@
 html {
-  font-family: 'Operator Mono', 'Fira Code', 'Courier New', Courier, monospace;
+  --fam: 'Operator Mono',
+    'Fira Code',
+    'Courier New',
+    Courier,
+    monospace;
+  font-family: var(--fam);
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -28,6 +33,7 @@ h1 {
   display: grid;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 
@@ -42,11 +48,13 @@ h1 {
 
 .color button {
   border: 0;
+  font-family: var(--fam);
   display: block;
   background: none;
   -webkit-appearance: none;
   position: relative;
   transition: transform 0.2s;
+  color: black;
 }
 
 .color button.zoop {
@@ -54,7 +62,8 @@ h1 {
 }
 
 .color .name {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  opacity: 0.8;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -70,6 +79,11 @@ h1 {
  {
   background: rgba(255,255,255,0.2);
   outline: none;
+}
+.hex:focus,
+.variable:focus {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
 }
 
 
