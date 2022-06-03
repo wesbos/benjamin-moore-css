@@ -1,3 +1,5 @@
+![](./gorg.png)
+
 ## Benjamin Moore Paint Colours as CSS Variables
 
 Ever want to make your website Benjamin Moore's Chantilly lace?
@@ -5,8 +7,14 @@ Ever want to make your website Benjamin Moore's Chantilly lace?
 Now you can:
 
 ```css
+:root {
+  --chantilly-lace: #F4F6F1;
+  --new-york-state-of-mind: #355473;
+}
+
 body {
   background: var(--chantilly-lace);
+  border: 2px dotted var(--new-york-state-of-mind);
 }
 ```
 
